@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mouse Pos</title>
+    <style>
+      body {
+        margin: 1em;
+        padding: 1em;
+        background-color: #efefef;
+      }
+      #myCanvas {
+        background-color: white;
+      }
+      footer {
+        margin-top: 2em;
+        font-family: monospace;
+        /*font-size: .8em;*/
+      }
+    </style>
+  </head>
+  <body>
+   <canvas id="myCanvas" width="600" height="200"></canvas>
+   <script>
+     var canvas = document.getElementById('myCanvas');
+     var context = canvas.getContext('2d');
+
+     function writeMessage(canvas, message) {
+       context.clearRect(0, 0, canvas.width, canvas.height);
+       context.font = '18pt Calibri';
+       context.fillStyle = 'black';
+       context.fillText(message, 10, 25);
+     }
+     function getMousePos(canvas, evt) {
+       var rect = canvas.getBoundingClientRect();
+       return {
+         x: evt.clientX - rect.left,
+         y: evt.clientY - rect.top
+       };
+     }
+     canvas.addEventListener('mousemove', function(evt) {
+       var mousePos = getMousePos(canvas, evt);
+       var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+       writeMessage(canvas, message);
+     }, false);
+   </script>
+
+   <footer>
+     source: http://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
+   </footer>
+ </body>
+</html>
